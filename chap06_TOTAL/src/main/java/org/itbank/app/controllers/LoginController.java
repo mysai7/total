@@ -9,6 +9,7 @@ import org.itbank.app.model.MemberDaoMyBatis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 	@Autowired
-	MemberDaoMyBatis dao;
+	MemberDaoMyBatis dao; 
 	
 	@RequestMapping({"/","/index"})
 	public String rootHandle(Model model) {
@@ -30,15 +31,16 @@ public class LoginController {
 		return "t_expr";
 	}
 	
-	@RequestMapping("/log/session")
+	@PostMapping("/log/session")
 	public ModelAndView sessionHandle(HttpSession session, @RequestParam Map map) throws SQLException {
+		ModelAndView mav = new ModelAndView("t_expr");
 		int r = dao.loginCheck(map);
 		if(r == 1) {
 			session.setAttribute("auth", map.get("id"));
+			mav.addObject("section", "index");
+		}else {
+			mav.addObject("section", "/log/login");
 		}
-		ModelAndView mav = new ModelAndView("t_expr");
-		mav.addObject("section", "index");
-		mav.addObject("r", r);
 		return mav;
 	}
 	

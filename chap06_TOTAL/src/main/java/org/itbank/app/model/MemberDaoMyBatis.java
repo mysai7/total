@@ -31,4 +31,8 @@ public class MemberDaoMyBatis {
 	public Map getDetail(String id) {
 		return template.selectOne("member.getDetail", id);
 	}
+	
+	public int updateDetail(Map map) {
+		return template.update("member.updateDetail", map);
+	}
 }

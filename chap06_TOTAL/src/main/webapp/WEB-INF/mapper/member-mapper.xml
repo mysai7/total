@@ -21,4 +21,7 @@
 	<select id="getDetail" resultType="java.util.HashMap">
 		select * from detail where id=#{id}
 	</select>
+	<update id="updateDetail" parameterType="java.util.HashMap">
+		update detail set name=#{name, jdbcType=VARCHAR}, gender=#{gender}, birth=#{birth}, address=#{address} where id=#{id}
+	</update>
 </mapper>

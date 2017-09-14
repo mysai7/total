@@ -1,23 +1,30 @@
 package org.itbank.app.controllers;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.itbank.app.model.MemberDaoMyBatis;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/my")
 public class MemberController {
-	@GetMapping({"/", "/index"})
-	public String infoGetHandle() {
-		return "t_expr";
-	}
-	@PostMapping({"/", "/index"})
-	public String infoPostHandle() {
-		return "t_expr";
-	}
-	@RequestMapping({"/", "/index"})
-	public String infoHandle() {
-		return "t_expr";
+	@Autowired
+	MemberDaoMyBatis dao;
+	
+	@GetMapping("/info")
+	public ModelAndView infoPostHandle(HttpSession session) {
+		ModelAndView mav = new ModelAndView("t_expr");
+		Map map = dao.getDetail((String)session.getAttribute("auto"));
+		mav.addObject("map", map);
+		mav.addObject("section", "my/info");
+		return mav;
 	}
 }

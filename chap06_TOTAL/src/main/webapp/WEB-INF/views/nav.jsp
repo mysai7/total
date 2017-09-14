@@ -12,6 +12,7 @@
 	<c:otherwise>
 		<div>
 			<b>${auth }</b>
+			<a href="/my/info">INFO</a> |
 			<a href="/log/logout">LOG OUT</a>
 		</div>
 	</c:otherwise>

@@ -16,4 +16,8 @@ public class MemberController {
 	public String infoPostHandle() {
 		return "t_expr";
 	}
+	@RequestMapping({"/", "/index"})
+	public String infoHandle() {
+		return "t_expr";
+	}
 }

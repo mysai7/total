@@ -25,7 +25,8 @@
 		<property name="order" value="9"/>
 	</bean>
 	
-	<context:component-scan base-package="org.itbank.app" />
+	<context:component-scan base-package="org.itbank.app.controllers" />
+	<context:component-scan base-package="org.itbank.app.model" />
 	
 	<bean class="com.fasterxml.jackson.databind.ObjectMapper"/>
 	
@@ -45,6 +46,7 @@
 		<property name="dataSource" ref="ds"/>
 		<property name="mapperLocations">
 			<list>
+				<value>/WEB-INF/mapper/member-mapper.xml</value>
 			</list>
 		</property>	
 	</bean>
@@ -77,7 +79,7 @@
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
 			<list>
-				<value></value>
+				<value>/WEB-INF/tiles/tiles-config.xml</value>
 			</list>
 		</property>
 	</bean>

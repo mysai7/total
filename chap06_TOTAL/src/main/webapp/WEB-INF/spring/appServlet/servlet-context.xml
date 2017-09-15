@@ -17,7 +17,13 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler/>
-
+	
+	<!-- multipartResolver 등록 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="uploadTempDir" value="/temp"/>
+		<property name="defaultEncoding" value="utf-8"/>
+	</bean>
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
@@ -82,5 +88,9 @@
 				<value>/WEB-INF/tiles/tiles-config.xml</value>
 			</list>
 		</property>
+	</bean>
+	
+	<bean class="java.text.SimpleDateFormat">
+		<constructor-arg name="pattern" value="yyyyMMddHHmmss"/>
 	</bean>
 </beans>

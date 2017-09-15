@@ -22,6 +22,12 @@
 		select * from detail where id=#{id}
 	</select>
 	<update id="updateDetail" parameterType="java.util.HashMap">
-		update detail set name=#{name, jdbcType=VARCHAR}, gender=#{gender}, birth=#{birth}, address=#{address} where id=#{id}
+		update detail set name=#{name}, gender=#{gender}, birth=#{birth}, address=#{address} where id=#{id}
 	</update>
+	<insert id="addProfile" parameterType="java.util.HashMap">
+		insert into profile values(profile_seq.nextval, #{id}, #{url}, sysdate)
+	</insert>
+	<select id="getProfile" resultType="java.util.HashMap">
+		select * from(select * from profile where id=#{id} order by regdate desc) where rownum=1
+	</select>
 </mapper>

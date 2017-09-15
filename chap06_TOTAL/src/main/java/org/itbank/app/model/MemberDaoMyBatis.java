@@ -35,4 +35,12 @@ public class MemberDaoMyBatis {
 	public int updateDetail(Map map) {
 		return template.update("member.updateDetail", map);
 	}
+	
+	public int addProfile(Map map) {
+		return template.insert("member.addProfile", map);
+	}
+	
+	public Map getProfile(String id) {
+		return template.selectOne("member.getProfile", id);
+	}
 }

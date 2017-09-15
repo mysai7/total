@@ -13,6 +13,7 @@
 		<div>
 			<b>${auth }</b>
 			<a href="/my/info">INFO</a> |
+			<a href="/my/profile">PROFILE</a> |
 			<a href="/log/logout">LOG OUT</a>
 		</div>
 	</c:otherwise>

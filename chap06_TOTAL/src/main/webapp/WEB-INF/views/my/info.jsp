@@ -46,6 +46,6 @@
 			<input type="text" value="${map.ADDRESS ne null ? map.ADDRESS : '' }" name="address" size="50" required/>
 		</p>
 		<button type="submit" style="width: 120px;">정보변경</button>
-		<a href="/my/drop.jsp"><button type="button">회원탈퇴</button></a>
+		<a href="/"><button type="button">회원탈퇴</button></a>
 	</form>
 </div>

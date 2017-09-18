@@ -37,13 +37,26 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView("t_expr");
 		//List<Map> list = dao.memberList();
 		int tot = dao.countAllMember();
+		int pageSize = 5;
+		int size = tot / pageSize;
+		if(tot % pageSize > 0) {
+			size++;
+		}
+		mav.addObject("tot", tot);
+		mav.addObject("last", size);
+		if(page > size) {
+			page = size;
+		}
+		if(page < 0) { 
+			page = 1;
+		}
 		Map map = new HashMap();
-		map.put("start", (page-1)*5+1 );
-		map.put("end", page*5);
+		map.put("start", (page - 1) * pageSize + 1 );
+		map.put("end", page * pageSize);
 		List<Map> list = dao.memberListPage(map);
 		mav.addObject("section", "member/list");
 		mav.addObject("list", list);
-		mav.addObject("size", tot);
+		
 		return mav;
 	}
 	

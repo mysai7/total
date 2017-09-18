@@ -5,7 +5,7 @@
 <c:choose>
 	<c:when test="${auth eq null }">
 		<div>
-			<a href="/my/list">MEMBER LIST</a> |
+			<a href="/my/list?page=1">MEMBER LIST</a> |
 			<a href="/member/join">JOIN</a> |
 			<a href="/log/login">LOGIN</a><br/>
 			<a href="/board/list">BOARD</a>		
@@ -16,7 +16,7 @@
 			<b>${auth }</b>
 			<a href="/my/info">INFO</a> |
 			<a href="/my/profile">PROFILE</a> |
-			<a href="/my/list">MEMBER LIST</a> |
+			<a href="/my/list?page=1">MEMBER LIST</a> |
 			<a href="/log/logout">LOG OUT</a><br/>
 			<a href="/board/list">BOARD</a>
 		</div>

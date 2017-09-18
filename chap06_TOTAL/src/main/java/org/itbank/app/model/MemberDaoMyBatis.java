@@ -1,5 +1,6 @@
 package org.itbank.app.model;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -42,5 +43,21 @@ public class MemberDaoMyBatis {
 	
 	public Map getProfile(String id) {
 		return template.selectOne("member.getProfile", id);
+	}
+	
+	public List<Map> getProfileAll(String id){
+		return template.selectList("member.getProfileAll", id);
+	}
+	
+	public List<Map> memberList(){
+		return template.selectList("member.memberList");
+	}
+	
+	public List<Map> memberListPage(Map map){
+		return template.selectList("member.memberListPage", map);
+	}
+	
+	public int countAllMember() {
+		return template.selectOne("member.countAllMember");
 	}
 }

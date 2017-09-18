@@ -3,6 +3,7 @@ package org.itbank.app.controllers;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -30,6 +31,21 @@ public class MemberController {
 	
 	@Autowired
 	SimpleDateFormat sdf;
+	
+	@GetMapping("/list")
+	public ModelAndView memberListHandle(@RequestParam(name="page", defaultValue="1") int page) {
+		ModelAndView mav = new ModelAndView("t_expr");
+		//List<Map> list = dao.memberList();
+		int tot = dao.countAllMember();
+		Map map = new HashMap();
+		map.put("start", (page-1)*5+1 );
+		map.put("end", page*5);
+		List<Map> list = dao.memberListPage(map);
+		mav.addObject("section", "member/list");
+		mav.addObject("list", list);
+		mav.addObject("size", tot);
+		return mav;
+	}
 	
 	@GetMapping("/profile")
 	public ModelAndView profileGetHandle(HttpSession session) {

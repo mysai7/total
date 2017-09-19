@@ -8,7 +8,9 @@
 			<a href="/my/list?page=1">MEMBER LIST</a> |
 			<a href="/member/join">JOIN</a> |
 			<a href="/log/login">LOGIN</a><br/>
-			<a href="/board/list">BOARD</a>		
+			<a href="/board/list">BOARD</a> |
+			<a href="/market/all">MARKET</a> |
+			<a href="/chat">CHAT</a>
 		</div>
 	</c:when>
 	<c:otherwise>
@@ -18,7 +20,9 @@
 			<a href="/my/profile">PROFILE</a> |
 			<a href="/my/list?page=1">MEMBER LIST</a> |
 			<a href="/log/logout">LOG OUT</a><br/>
-			<a href="/board/list">BOARD</a>
+			<a href="/board/list">BOARD</a> |
+			<a href="/market/all">MARKET</a> |
+			<a href="/chat">CHAT</a>
 		</div>
 	</c:otherwise>
 </c:choose>

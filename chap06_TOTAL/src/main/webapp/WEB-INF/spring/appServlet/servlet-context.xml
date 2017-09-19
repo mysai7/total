@@ -6,7 +6,9 @@
 	xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
@@ -17,6 +19,16 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler/>
+	<context:component-scan base-package="org.itbank.app" />
+	
+	<!-- websocket handler -->
+	<bean class="org.itbank.app.ws.controller.BasicWsHandler" id="bws"/>
+	<bean class="org.itbank.app.ws.controller.ChatWsHandler" id="cws"/>
+	<websocket:handlers>
+		<websocket:mapping handler="bws" path="/ws/basic"/>
+		<websocket:mapping handler="cws" path="/ws/chat"/>
+		<websocket:mapping handler="aws" path="/ws/alert"/>
+	</websocket:handlers>
 	
 	<!-- multipartResolver 등록 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -30,10 +42,10 @@
 		<property name="suffix" value=".jsp" />
 		<property name="order" value="9"/>
 	</bean>
-	
+ <!-- 	
 	<context:component-scan base-package="org.itbank.app.controllers" />
 	<context:component-scan base-package="org.itbank.app.model" />
-	
+ -->	
 	<bean class="com.fasterxml.jackson.databind.ObjectMapper"/>
 	
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -54,6 +66,7 @@
 			<list>
 				<value>/WEB-INF/mapper/member-mapper.xml</value>
 				<value>/WEB-INF/mapper/board-mapper.xml</value>
+				<value>/WEB-INF/mapper/market-mapper.xml</value>
 			</list>
 		</property>	
 	</bean>

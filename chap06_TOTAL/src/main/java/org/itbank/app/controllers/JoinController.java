@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.itbank.app.model.MemberDaoMyBatis;
+import org.itbank.app.ws.controller.AlertWsHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,9 @@ public class JoinController {
 	@Autowired
 	MemberDaoMyBatis dao;
 	
+	@Autowired
+	AlertWsHandler aws;	// 웹소켓 핸들러를 AutoWired 걸어서 연결 잡고
+	
 	@RequestMapping(path="/join", method=RequestMethod.GET)
 	public ModelAndView joinHandle() {
 		ModelAndView mav = new ModelAndView("t_expr");
@@ -35,6 +39,10 @@ public class JoinController {
 		try {
 			dao.addMember(map);
 			session.setAttribute("auth", map.get("id"));
+			/*
+			 * AlertWsHandler를 통해서, 메세지를 보내보자. 
+			 */
+			aws.sendMessage("새로운 가입자가 있습니다.");
 			return "redirect:/";
 		}catch(Exception e){
 			return "redirect:/member/join";

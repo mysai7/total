@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="market">
+	<insert id="addItem" parameterType="java.util.HashMap">
+		insert into market values(market_seq.nextval,#{iname},#{smoney},#{dmoney, jdbcType=NUMERIC},#{edate, jdbcType=DATE})
+	</insert>
+	<select id="readAll" resultType="java.util.HashMap">
+		select * from market order by num desc
+	</select>
+	<select id="searchOne" resultType="java.util.HashMap">
+		<![CDATA[	
+			select * from market where smoney <= #{search}
+		]]>	
+	</select>
+	<select id="searchTwo" resultType="java.util.HashMap">
+		select * from market where smoney <![CDATA[ <= ]]> #{search}
+		<if test="mode != null">
+			 and dmoney is not null
+		</if>
+	</select>
+	<select id="getAll" resultType="java.util.HashMap">
+		select p.edate-sysdate as gab, p.* from market p
+	</select>
+	<select id="readOne" resultType="java.util.HashMap">
+		select * from market where num=#{num}
+	</select>
+</mapper>

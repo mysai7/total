@@ -28,6 +28,10 @@
 		<websocket:mapping handler="bws" path="/ws/basic"/>
 		<websocket:mapping handler="cws" path="/ws/chat"/>
 		<websocket:mapping handler="aws" path="/ws/alert"/>
+		<websocket:mapping handler="lws" path="/ws/login"/>
+		<websocket:handshake-interceptors>
+			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
 	</websocket:handlers>
 	
 	<!-- multipartResolver 등록 -->
@@ -67,6 +71,7 @@
 				<value>/WEB-INF/mapper/member-mapper.xml</value>
 				<value>/WEB-INF/mapper/board-mapper.xml</value>
 				<value>/WEB-INF/mapper/market-mapper.xml</value>
+				<value>/WEB-INF/mapper/memo-mapper.xml</value>
 			</list>
 		</property>	
 	</bean>

@@ -37,7 +37,11 @@ public class ChatWsHandler extends TextWebSocketHandler{
 		String json = String.format("{\"mode\":\"join\", \"sender\":\"사용자%s\", \"cnt\":%d }", session.getId(), list.size());
 		System.out.println(json +" at afterConnectionEstablished." );
 		for(WebSocketSession wss : list) {
-			wss.sendMessage(new TextMessage(json));
+			if(wss != session) {
+				wss.sendMessage(new TextMessage(json));
+			}else {
+				wss.sendMessage(new TextMessage(String.format("{\"cnt\":%d }", list.size())));
+			}
 		}
 	}
 	
@@ -54,6 +58,7 @@ public class ChatWsHandler extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		Map map = new HashMap<>();
+		map.put("mode", "chat");
 		map.put("sender", "사용자"+session.getId());
 		map.put("msg", message.getPayload());
 		map.put("cnt", list.size());

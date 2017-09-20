@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-	p{padding: 5px;margin: 2px;	}
+	p, b{padding: 5px;margin: 2px;	}
+	
 </style>
 <div align="center" style="margin: 10px;">
 	<h3>OPEN CHAT [접속자 : <b id="cnt"></b>명]</h3>
@@ -27,18 +28,19 @@
 	}
 	ws.onmessage = function(e){
 		var obj = JSON.parse(e.data);
+		document.getElementById("cnt").innerHTML = obj.cnt;
 		if(obj.msg != null){
-			document.getElementById("log").innerHTML += "["+obj.sender+"] : "+obj.msg+"<br/>";
+			document.getElementById("log").innerHTML += "<b>["+obj.sender+"] : "+obj.msg+"</b><br/>";
 			document.getElementById("log").scrollTop = document.getElementById("log").scrollHeight;
 		}
-		if(obj.cnt != null){
-			document.getElementById("cnt").innerHTML = obj.cnt;
-		}
+	//	if(obj.cnt != null){
+	//		document.getElementById("cnt").innerHTML = obj.cnt;
+	//	}
 		if(obj.mode == "join"){
-			document.getElementById("log").innerHTML += "["+obj.sender+"]님이 입장 하셨습니다.<br/>";
+			document.getElementById("log").innerHTML += "<b style=\"color: blue;\">["+obj.sender+"]님이 입장 하셨습니다.<br/>";
 		}
 		if(obj.mode == "closed"){
-			document.getElementById("log").innerHTML += "["+obj.sender+"]님이 퇴장 하셨습니다.<br/>";
+			document.getElementById("log").innerHTML += "<b style=\"color: red;\">["+obj.sender+"]님이 퇴장 하셨습니다.<br/>";
 		}
 	} 
 </script>

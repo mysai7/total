@@ -13,7 +13,7 @@ input {
 	<div style="width: 60%; line-height: 30px;">
 		<h2>경매물품 상세보기</h2>
 		<hr />
-		<form action="/market/add" method="post">
+		<form action="/market/auction" method="post">
 			<p>
 				물품명 : ${data.INAME }
 			</p>

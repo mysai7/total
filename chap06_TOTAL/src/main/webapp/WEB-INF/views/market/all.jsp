@@ -27,6 +27,7 @@ button {
 		<thead>
 			<tr>
 				<th style="width: 50%">#상품명</th>
+				<th style="width: 20%">#최종입찰가</th>
 				<th style="width: 15%">#시작가</th>
 				<th style="width: 15%">#즉구가</th>
 				<th style="width: 20%">#종료일</th>
@@ -38,6 +39,7 @@ button {
 					<td><a href="/market/view/${obj.NUM }" >${obj.INAME } <small>(<fmt:formatNumber
 								value="${obj.GAB }" pattern="#,##0.00" />일 남음)
 					</small></a></td>
+					<td id="p_${obj.NUM }"><fmt:formatNumber value="${obj.PRICE }" pattern="#,###" /></td>
 					<td><fmt:formatNumber value="${obj.SMONEY }" pattern="#,###" /></td>
 					<td><fmt:formatNumber value="${obj.DMONEY }" pattern="#,###" /></td>
 					<td><c:if test="${!empty obj.EDATE }">~<fmt:formatDate
@@ -57,5 +59,4 @@ button {
 		<button type="submit">검색</button>
 	</form>
 </div>
-
 

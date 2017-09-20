@@ -16,21 +16,27 @@
 		]]>	
 	</select>
 	<select id="searchTwo" resultType="java.util.HashMap">
-		select * from market where smoney <![CDATA[ <= ]]> #{search}
-		<if test="mode != null">
-			 and dmoney is not null
-		</if>
+		select m.edate-sysdate as gab, m.* from market m where smoney <![CDATA[ <= ]]> #{search}
+		<choose>
+			<when test="mode != null">
+				 and dmoney is not null order by m.num desc
+			</when>
+			<otherwise>
+				order by m.num desc
+			</otherwise>
+		</choose>
 	</select>
 	<select id="getAll" resultType="java.util.HashMap">
-		select p.edate-sysdate as gab, p.* from market p
+		select m.edate-sysdate as gab, m.*, a.* from market m left join
+		 (select parent, max(price) as price from auction group by parent)
+		  a on m.num = a.parent order by m.num desc
 	</select>
 	<select id="readOne" resultType="java.util.HashMap">
-		select * from market where num=#{num}
+		select m.edate-sysdate as gab, m.*, a.* from market m left join
+		 (select parent, max(price) as price from auction group by parent)
+		  a on m.num = a.parent where num=#{num}
 	</select>
-	<insert id="addPrice">
+	<insert id="addAuction">
 		insert into auction values(auction_seq.nextval, #{parent}, #{price}, #{id}, sysdate)
 	</insert>
-	<select id="readPrice">
-		
-	</select>
 </mapper>

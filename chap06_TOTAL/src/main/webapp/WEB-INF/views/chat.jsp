@@ -17,13 +17,13 @@
 			this.value = "";
 		}
 	}
-	var ws = new WebSocket("ws://192.168.10.66/ws/chat");
+	var ws = new WebSocket("ws://192.168.0.17/ws/chat");
 	ws.onopen = function(e) {
 		document.getElementById("log").innerHTML += "<p><b>[오픈채팅 서버 접속 성공]</b></p>";
 	}
 	ws.onerror = function(e) {
 		if(window.confirm("채팅서버 접속 실패\n다시 접속하시겠습니까?")) {
-			ws = new WebSocket("ws://192.168.10.66/ws/chat");
+			ws = new WebSocket("ws://192.168.0.17/ws/chat");
 		}
 	}
 	ws.onmessage = function(e){

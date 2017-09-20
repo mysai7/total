@@ -20,7 +20,7 @@ public class LoginUserWsHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		// HttpSession을 어떻게 접근?
-		// [interceptor 등록을 한경우에만 작동함.
+		// Interceptor 등록을 한경우에만 작동함.
 		Map<String, Object> hs = session.getAttributes();
 		// HttpSession setAttriubte 되어있는 값들이 Map으로 추출됨.
 		System.out.println(hs);

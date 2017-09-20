@@ -32,4 +32,8 @@ public class MarketDaoMyBatis {
 	public Map readOne(String num) {
 		return template.selectOne("market.readOne" , num);
 	}
+	
+	public int addAuction(Map map) {
+		return template.insert("market.addAuction", map);
+	}
 }

@@ -31,13 +31,21 @@
 </div>
 <c:if test="${!empty auth }">
 	<script>
-		var lws = new WebSocket("ws://192.168.10.66/ws/login");
+		var lws = new WebSocket("ws://192.168.0.17/ws/login");
 		
 		lws.onmessage = function(e){
 			console.log(e.data);
 			if(window.confirm(e.data)){
 				location.href="/memo/receive";	
 			}
+		}
+		
+		var auctionws = new WebSocket("ws://192.168.0.17/ws/auction");
+		
+		auctionws.onmessage = function(e){
+			console.log(e.data);
+			var obj = JSON.parse(e.data);
+			document.getElementById("p_"+obj.parent).innerHTML = obj.price;
 		}
 	</script>
 </c:if>

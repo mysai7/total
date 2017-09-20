@@ -3,6 +3,7 @@ package org.itbank.app.controllers;
 import java.util.Map;
 
 import org.itbank.app.model.MarketDaoMyBatis;
+import org.itbank.app.ws.controller.AuctionWsHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,18 @@ import org.springframework.web.servlet.ModelAndView;
 public class MarketController {
 	@Autowired
 	MarketDaoMyBatis dao;
+	
+	@Autowired
+	AuctionWsHandler auctionws;
+	
+	@PostMapping("/auction")
+	public ModelAndView addAuctionHandle(@RequestParam Map map) {
+		ModelAndView mav = new ModelAndView("redirect:view/"+map.get("parent"));
+		int r = dao.addAuction(map);
+		String msg = String.format("{\"parent\":\"%s\",\"price\":\"%s\"}", map.get("parent"), map.get("price"));
+		auctionws.sendMessageToUser((String)map.get("id"), msg);
+		return mav;
+	}
 	
 	@GetMapping(path="/view/{num}")
 	public ModelAndView detailHandle(@PathVariable String num) {

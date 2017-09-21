@@ -26,7 +26,7 @@ public class MarketController {
 	public ModelAndView addAuctionHandle(@RequestParam Map map) {
 		ModelAndView mav = new ModelAndView("redirect:view/"+map.get("parent"));
 		int r = dao.addAuction(map);
-		String msg = String.format("{\"parent\":\"%s\",\"price\":\"%s\"}", map.get("parent"), map.get("price"));
+		String msg = String.format("{\"id\":\"%s\", \"parent\":\"%s\",\"price\":\"%s\"}", map.get("id"), map.get("parent"), map.get("price"));
 		auctionws.sendMessageToUser((String)map.get("id"), msg);
 		return mav;
 	}

@@ -31,7 +31,7 @@
 </div>
 <c:if test="${!empty auth }">
 	<script>
-		var lws = new WebSocket("ws://192.168.0.17/ws/login");
+		var lws = new WebSocket("ws://192.168.10.66/ws/login");
 		
 		lws.onmessage = function(e){
 			console.log(e.data);
@@ -40,7 +40,7 @@
 			}
 		}
 		
-		var auctionws = new WebSocket("ws://192.168.0.17/ws/auction");
+		var auctionws = new WebSocket("ws://192.168.10.66/ws/auction");
 		
 		auctionws.onmessage = function(e){
 			console.log(e.data);

@@ -14,6 +14,13 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+		<dependency>
+		    <groupId>org.jsoup</groupId>
+		    <artifactId>jsoup</artifactId>
+		    <version>1.10.3</version>
+		</dependency>
+	
 		<!-- https://mvnrepository.com/artifact/org.springframework.integration/spring-integration-mail -->
 		<dependency>
 		    <groupId>org.springframework.integration</groupId>

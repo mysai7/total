@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,7 +44,7 @@ public class JoinController {
 			msg.setTo(email);
 			msg.setFrom("itbanksaan@gmail.com");
 			msg.setSubject("회원가입 인증 메일입니다.");
-			String text = "환영합니다.\n항상 최선의 서비스를 제공하겠습니다.\n"+auth_str;
+			String text = "환영합니다.\n항상 최선의 서비스를 제공하겠습니다.\n인증키 : "+auth_str;
 			msg.setText(text);
 			System.out.println(text);
 			sender.send(msg);
@@ -66,12 +65,13 @@ public class JoinController {
 	@RequestMapping(path="/join", method=RequestMethod.POST)
 	public String joinrstHandle(@RequestParam Map map, HttpSession session) {
 		System.out.println(session.getAttribute("auth_str"));
-		String auth_str = (String)session.getAttribute("auth_str");
+		String authstr = (String)session.getAttribute("auth_str");
 		String ekey = (String)map.get("ekey");
+		System.out.println(ekey.equals(authstr));
 		try {
-			if(ekey.equals(auth_str)) {
+			if(ekey.equals(authstr)) {
 				dao.addMember(map);
-				session.setAttribute("auth", map.get("id"));
+				session.setAttribute("auth", (String)map.get("id"));
 				/*
 				 * AlertWsHandler를 통해서, 메세지를 보내보자. 
 				 */
@@ -83,9 +83,9 @@ public class JoinController {
 		}
 	}
 	
-	@RequestMapping(path="/signup_check/id/{id}", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	@RequestMapping(path="/signup_check/id", method=RequestMethod.POST, produces="text/html;charset=utf-8")
 	@ResponseBody
-	public String idCheckHandle(@PathVariable String id) throws SQLException {
+	public String idCheckHandle(@RequestBody String id) throws SQLException {
 		int r = dao.idCheck(id);
 		if(r == 1) {
 			return "<b style=\"color: red;\">이미 사용중인 아이디입니다.</b>";

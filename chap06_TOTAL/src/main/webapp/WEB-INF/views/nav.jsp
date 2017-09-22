@@ -8,6 +8,7 @@
 			<a href="/my/list?page=1">MEMBER LIST</a> |
 			<a href="/member/join">JOIN</a> |
 			<a href="/log/login">LOGIN</a><br/>
+			<a href="/parkinfo">PARKINFO</a> |
 			<a href="/board/list">BOARD</a> |
 			<a href="/market/all">MARKET</a> |
 			<a href="/chat">CHAT</a>

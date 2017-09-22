@@ -77,8 +77,8 @@
 					document.getElementById("irst").innerHTML = obj;						
 				}
 			}
-		xhr.open("post", "/member/signup_check/id/"+id, true);
-		xhr.send();
+		xhr.open("post", "/member/signup_check/id", true);
+		xhr.send(id);
 		}else{
 			document.getElementById("irst").innerHTML = "";
 		}

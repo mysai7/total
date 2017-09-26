@@ -46,6 +46,9 @@
 	<select id="countAllMember" resultType="java.lang.Integer">
 		select count(*) from member m left join (select id, max(url) as url from profile group by id) p on m.id = p.id order by m.id asc
 	</select>
+	<select id="searchMember" resultType="java.util.HashMap">
+		select * from member where id like #{id}
+	</select>
 </mapper>
 
 

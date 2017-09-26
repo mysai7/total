@@ -19,24 +19,44 @@
 	<hr />
 	수량 :
 	<button id="m">-</button>
-	<input id="c" type="number" style="width: 50px;" value="1" min="1" />
+	<input id="cnt" type="number" style="width: 50px;" value="1" min="1" />
 	<button id="p">+</button>
 	<hr />
 </div>
-<div>전체 상품 총액 : <span id="t">656,000</span></div>
+<div>전체 상품 총액 : <span id="rst">656,000</span></div>
 <script>
-	var osum = 0;
+	var total = 656000;
 	$(".opt").change(function(){
 	//	console.log(typeof $(this).attr("data"));
 	//	console.log($(this).attr("data") + 100);
 	//	console.log(typeof  parseInt($(this).attr("data"))  );
 	//	console.log(parseInt($(this).attr("data")) + 100 );
 		if($(this).prop("checked")){
-			osum += parseInt($(this).attr("data"));
-			console.log(osum);
+			total += parseInt($(this).attr("data"));
 		}else{
-			osum -= parseInt($(this).attr("data"));
-			console.log(osum);
+			total -= parseInt($(this).attr("data"));
+		}
+		$("#rst").html(total * parseInt($("#cnt").val()));
+	});
+	
+	$("#cnt").change(function(){
+		print();
+	});
+	
+	$("#p").click(function(){
+		$("#cnt").val(parseInt($("#cnt").val()) +1 );
+		$("#cnt").trigger("change");	// 이벤트 발생
+	});
+	
+	$("#m").click(function(){
+		if(parseInt($("#cnt").val()) > 1 ){
+			$("#cnt").val(parseInt($("#cnt").val()) -1 );
+			$("#cnt").trigger("change");	// 이벤트 발생
 		}
 	});
+	
+	var print = function(){
+		$("#rst").html(total * parseInt($("#cnt").val()));
+	}
+	
 </script>

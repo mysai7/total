@@ -49,6 +49,9 @@
 	<select id="searchMember" resultType="java.util.HashMap">
 		select * from member where id like #{id}
 	</select>
+	<select id="countByGender" resultType="java.util.HashMap">
+		select nvl(gender, '미설정') as gender, count(*) as cnt from detail group by gender
+	</select>
 </mapper>
 
 

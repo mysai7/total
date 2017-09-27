@@ -64,4 +64,8 @@ public class MemberDaoMyBatis {
 	public List<Map> searchMember(String search) {
 		return template.selectList("member.searchMember", search+"%");
 	}
+	
+	public List<Map> countByGender(){
+		return template.selectList("member.countByGender");
+	}
 }

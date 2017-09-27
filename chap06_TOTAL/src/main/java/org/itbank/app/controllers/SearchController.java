@@ -1,6 +1,5 @@
 package org.itbank.app.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,9 +27,14 @@ public class SearchController {
 	@RequestMapping("/rst")
 	@ResponseBody
 	public List<Map> searchRstHandle(@RequestParam String search){
-		List<Map> list;
-		list = dao.searchMember(search);
-		System.out.println(list);		
-		return list;
+		return dao.searchMember(search);
 	}
+	
+//	@RequestMapping("/rst")
+//	public ModelAndView searchIdAjaxxHandle(@RequestParam String search) {
+//		ModelAndView mav = new ModelAndView("member/searchresult");
+//		mav.addObject("data", dao.searchMember(search));
+//		
+//		return mav;
+//	}
 }

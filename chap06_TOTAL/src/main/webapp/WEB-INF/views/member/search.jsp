@@ -6,23 +6,28 @@
 	<p>
 		<input type="text" id="srch"/>
 	</p>
-	<p id="rst">
-	</p>
+	<div id="rst">
+	</div>
 </div>
 <script>
 	// keypress, keydown, keyup
 	$("#srch").keyup(function(){
-		var val = $(this).val();
-		console.log(val);
+		if($("#srch").val().length == 0){
+			return;
+		}
 		$.ajax({
 			"url" : "/member/rst",
 			"data" : {
-				"search" : val 
+				"search" : $("#srch").val()
 			}
 		}).done(function(r){
+			//$("#rst").append(r);
+			
 			for(var i=0; i<r.length; i++){
-				console.log(r[i].ID);
+				var h = "<b>"+r[i].ID+"</b>("+r[i].EMAIL+")<br/>";
+				$("#rst").append(h);
 			}
+			
 		});
 	});
 </script>

@@ -87,6 +87,7 @@
 				<value>/WEB-INF/mapper/board-mapper.xml</value>
 				<value>/WEB-INF/mapper/market-mapper.xml</value>
 				<value>/WEB-INF/mapper/memo-mapper.xml</value>
+				<value>/WEB-INF/mapper/research-mapper.xml</value>
 			</list>
 		</property>	
 	</bean>

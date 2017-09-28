@@ -18,7 +18,7 @@
 			<a href="/my/list?page=${param.page -1 }" style="text-decoration: none">
 				<b>◀</b></a>	
 		</c:if>
-		<c:forEach var="i" begin="1" end="${last }" varStatus="vs">
+		<c:forEach var="i" begin="${pb }" end="${pe }" varStatus="vs">
 			<c:choose>
 				<c:when test="${i eq param.page }">
 					<b>${i }</b>

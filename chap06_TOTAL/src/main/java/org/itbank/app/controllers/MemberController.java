@@ -37,13 +37,16 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView("t_expr");
 		//List<Map> list = dao.memberList();
 		int tot = dao.countAllMember();
-		int pageSize = 5;
+		int pageSize = 2;
 		int size = tot / pageSize;
 		if(tot % pageSize > 0) {
 			size++;
 		}
 		mav.addObject("tot", tot);
 		mav.addObject("last", size);
+		mav.addObject("pb", (page - 1) / 10 * 10 + 1);	// 1 ~ 10 ==> 1
+		mav.addObject("pe", (page - 1) / 10 * 10 + 10 < size ? (page - 1) / 10 * 10 + 10 : size);	// 11 ~ 20 ==> 11
+		
 		if(page > size) {
 			page = size;
 		}

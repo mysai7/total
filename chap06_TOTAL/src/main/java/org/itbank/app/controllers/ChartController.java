@@ -1,6 +1,7 @@
 package org.itbank.app.controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -38,8 +39,11 @@ public class ChartController {
 	@ResponseBody
 	public List<Map> researchChartAjaxHandle(){
 		List<Map> list = researchDao.scoreCount();
+		List all = Arrays.asList("1점","2점","3점","4점","5점");
 		List json = new ArrayList();
 		for(Map m : list) {
+			String s = (String)m.get("SCORE");
+			all.remove(s);
 			Object[] ar = new Object[] {m.get("SCORE"), m.get("CNT")};
 			json.add(ar);
 		}

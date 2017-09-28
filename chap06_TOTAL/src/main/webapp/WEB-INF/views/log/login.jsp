@@ -1,22 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- 로그인 관련 입력 폼만 구축 -->
-<div align="center">
-	<h2>로그인</h2>
-	<form action="/log/session" method="post">
-		<P>
-			<b>ID</b><br /><input type="text" name="id" required /><br /> 
-		</P>
-		<p>
-			<b>PASS</b><br /> <input type="password" name="pass" required /><br />
-		</p>
-		<p>
-			<input type="checkbox" name="keep" value="keep" id="ch" onchange="javascript:check()"/>로그인 유지
-		</p>
-		<p>
-			<button type="submit" style="width: 169px;">LOGIN</button>
-		</p>
-	</form>
+<div class="row">
+	<div class="col-md-3">
+		<h3>WELCOME<small>login</small></h3>
+	</div>
+	<div class="col-md-9">
+		<div align="center">
+			<h2>로그인</h2>
+			<form action="/log/session" method="post">
+				<P>
+					<b>ID</b><br /><input type="text" name="id" required /><br /> 
+				</P>
+				<p>
+					<b>PASS</b><br /> <input type="password" name="pass" required /><br />
+				</p>
+				<p>
+					<input type="checkbox" name="keep" value="keep" id="ch" onchange="javascript:check()"/>로그인 유지
+				</p>
+				<p>
+					<button type="submit" style="width: 169px;">LOGIN</button>
+				</p>
+			</form>
+		</div>
+	</div>
 </div>
 <script>
 	function check(){

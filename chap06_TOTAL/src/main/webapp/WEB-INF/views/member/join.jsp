@@ -18,7 +18,7 @@
 		</p>
 		<p id="auth_view" style="display: none;">
 			<b>AUTHORIZED KEY</b> <small id="left" style="color: red; font-weight: bold"></small><br />
-			<input	id="ekey" type="text" name="email" required />
+			<input	id="authkey" type="text" name="email" required />
 		</p>
 		<button id="bt" type="submit" style="width: 120px;" disabled >가입</button>
 	</form>
@@ -47,9 +47,31 @@
 		}
 	}
 	
-	document.getElementById("ekey").onkeyup = function(){
-		document.getElementById("bt").disabled = false;
+	document.getElementById("authkey").onchange = function(e) {
+		var key = document.getElementById("authkey").value;
+		var param = "key=" + key;
+		var xhr = new XMLHttpRequest();
+		xhr.open("post", "/member/join/authCheck?" + param, true);
+		// 파라미터 방식이 아닌 post requestBody로 처리하는게 가능하기에
+		xhr.send(); // 이메일만 넘겨보는 방식
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4) {
+				if (this.responseText == "YYYYY") {
+					window.alert("인증에 성공하였습니다.");
+					clearInterval(time);
+					document.getElementById("auth_view").style.display = "none";
+					document.getElementById("email").readOnly = true;
+					document.getElementById("bt").disabled = false;
+				} else {
+					window.alert("잘못된 인증키를 입력하셨습니다.");
+				}
+			}
+		}
 	}
+	
+	//document.getElementById("authkey").onkeyup = function(){
+	//	document.getElementById("bt").disabled = false;
+//	}
 	
 	var limit = function() {
 		var m = Math.floor(tot / 60);

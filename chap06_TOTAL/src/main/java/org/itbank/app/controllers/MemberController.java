@@ -73,10 +73,10 @@ public class MemberController {
 		mav.addObject("section", "my/profile");
 		return mav;
 	}
-	
+	@SuppressWarnings("rawtypes")
 	@PostMapping("/profile")
-	public ModelAndView profilePostHandle(@RequestParam Map param, @RequestParam(name="profile") MultipartFile f, HttpServletRequest request,
-			HttpSession session) throws InterruptedException {
+	public ModelAndView profilePostHandle(@RequestParam(name="profile") MultipartFile f, HttpSession session)
+			throws InterruptedException {
 //		System.out.println(request.getParameter("nick"));
 //		System.out.println(application.getRealPath("/temp"));
 //		Thread.sleep(10000);
@@ -89,7 +89,7 @@ public class MemberController {
 //		System.out.println(f.getOriginalFilename());
 //		System.out.println(f.getSize());
 		// transferTo(File f) .. 실제 업로드. getInputStream()
-		ModelAndView mav = new ModelAndView("redirect:profile");
+		ModelAndView mav = new ModelAndView("redirect:/my/profile");
 		String id = (String)session.getAttribute("auth");
 		String fmt = sdf.format(System.currentTimeMillis());
 		String path = application.getRealPath("/profiles");

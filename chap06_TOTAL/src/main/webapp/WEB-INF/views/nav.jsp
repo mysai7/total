@@ -20,6 +20,7 @@
 		        <li><a href="/board/list">BOARD</a></li>
 		        <li><a href="/market/all">MARKET</a></li>
 		        <li><a href="/chat">CHAT</a></li>
+		        <li><a href="/my/profile">PROFILE</a></li>
 		    </c:when>
 			<c:otherwise>
 				<li><a href="/board/list">BOARD</a></li>

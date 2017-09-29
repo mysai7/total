@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 로그인 관련 입력 폼만 구축 -->
 <div class="row">
 	<div class="col-md-3">
@@ -9,6 +10,9 @@
 		<div align="center">
 			<h2>로그인</h2>
 			<form action="/log/session" method="post">
+				<c:if test="${ !empty param.redirect }">
+					<input type="hidden" name="redirect" value="${param.redirect }" />
+				</c:if>
 				<P>
 					<b>ID</b><br /><input type="text" name="id" required /><br /> 
 				</P>
@@ -27,11 +31,11 @@
 </div>
 <script>
 	function check(){
-		if(document.getElementById("ch").checked){
+		if($("#ch").prop("checked")){
 			if(window.confirm("개인정보 보호를 위해 개인PC에서만 사용해 주세요\n계속 하시겠습니까?")) {
-				document.getElementById("ch").checked = true;
+				$("#ch").prop("checked", true);
 			}else{
-				document.getElementById("ch").checked = false;
+				$("#ch").prop("checked", false);
 			}
 		}
 	}

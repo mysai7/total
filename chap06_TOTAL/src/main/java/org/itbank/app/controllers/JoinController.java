@@ -35,23 +35,36 @@ public class JoinController {
 	@RequestMapping(path="/email_check", method=RequestMethod.POST, produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String ekeyCheckHandle(@RequestBody String email, HttpSession session) {
-		System.out.println(email);
+		//System.out.println(email);
 		UUID u = UUID.randomUUID();
-		String auth_str = u.toString().substring(0, 13);
-		session.setAttribute("auth_str", auth_str);
+		String authkey = u.toString().substring(0, 13);
+		session.setAttribute("authkey", authkey);
 		SimpleMailMessage msg = new SimpleMailMessage();
 		try {
 			msg.setTo(email);
 			msg.setFrom("itbanksaan@gmail.com");
 			msg.setSubject("회원가입 인증 메일입니다.");
-			String text = "환영합니다.\n항상 최선의 서비스를 제공하겠습니다.\n인증키 : "+auth_str;
+			String text = "환영합니다.\n항상 최선의 서비스를 제공하겠습니다.\n인증키 : "+authkey;
 			msg.setText(text);
-			System.out.println(text);
+			//System.out.println(text);
 			sender.send(msg);
 			return "true";
 		}catch(Exception e) {
 			e.printStackTrace();
 			return "false";
+		}
+	}
+	
+	@RequestMapping("/join/authCheck")
+	@ResponseBody
+	public String joinAuthCheckHandle(@RequestParam String key, HttpSession session) {
+		System.out.println(key);
+		System.out.println(session.getAttribute("authkey"));
+		System.out.println(key.equals(session.getAttribute("authkey")));
+		if(key.equals((String)session.getAttribute("authkey")) ) {
+			return "YYYYY";
+		}else {
+			return "NNNNN";
 		}
 	}
 	
@@ -64,19 +77,14 @@ public class JoinController {
 	
 	@RequestMapping(path="/join", method=RequestMethod.POST)
 	public String joinrstHandle(@RequestParam Map map, HttpSession session) {
-		System.out.println(session.getAttribute("auth_str"));
-		String authstr = (String)session.getAttribute("auth_str");
-		String ekey = (String)map.get("ekey");
-		System.out.println(ekey.equals(authstr));
 		try {
-			if(ekey.equals(authstr)) {
-				dao.addMember(map);
-				session.setAttribute("auth", (String)map.get("id"));
-				/*
-				 * AlertWsHandler를 통해서, 메세지를 보내보자. 
-				 */
-				aws.sendMessage("새로운 가입자가 있습니다.");
-			}
+			dao.addMember(map);
+			session.setAttribute("auth", (String)map.get("id"));
+			/*
+			 * AlertWsHandler를 통해서, 메세지를 보내보자. 
+			 */
+			aws.sendMessage("새로운 가입자가 있습니다.");
+		
 			return "redirect:/";
 		}catch(Exception e){
 			return "redirect:/member/join";
